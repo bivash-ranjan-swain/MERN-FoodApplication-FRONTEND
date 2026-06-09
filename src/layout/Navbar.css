@@ -1,0 +1,138 @@
+.Navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 7%;
+  align-items: center;
+  position: fixed;
+  background-color: white;
+  top: 0;
+}
+/* ---------------------LEFT-START--------------------- */
+
+.Navbar .nav-left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.nav-left .Logo {
+  width: 12%;
+}
+.nav-left .heading {
+  font-size: 1.2rem;
+}
+
+/* ---------------------LEFT-END--------------------- */
+/* ---------------------MIDDLE-START--------------------- */
+.Navbar .nav-middle {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.nav-middle a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+}
+
+/* ---------------------MIDDLE-END--------------------- */
+
+/* ---------------------RIGHT-START--------------------- */
+
+.Navbar .nav-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 5px;
+}
+.nav-right .Book-btn {
+  background-color: rgb(241, 10, 10);
+  border: none;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.nav-right .Book-btn:active {
+  transform: scale(0.95);
+}
+.nav-right .icon {
+  cursor: pointer;
+}
+
+.Navbar .menu-icon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+/* Mobile Menu csss Start */
+.Navbar .mobile-menu {
+  position: absolute;
+  width: 100%;
+  padding: 12px 7%;
+  background-color: white;
+  margin-top: 330px;
+  left: 0;
+}
+.mobile-menu .mobile-menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.mobile-menu-item a {
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+.mobile-menu .mobile-btn {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.mobile-btn .Book-btn {
+  padding: 0.5rem 1rem;
+  background-color: red;
+  color: white;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 9px;
+}
+.mobile-btn .ls-btn {
+  padding: 0.5rem 1rem;
+  background-color: blue;
+  color: white;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 9px;
+}
+
+/* Media query Start Here */
+
+@media (max-width: 576px) {
+  .nav-left .heading {
+    display: none;
+  }
+  .Navbar .nav-middle {
+    display: none;
+  }
+  .Navbar .nav-right {
+    display: none;
+  }
+  .nav-left .Logo {
+    width: 20%;
+  }
+}
+@media (min-width: 577px) {
+  .Navbar .menu-icon {
+    display: none;
+  }
+}
