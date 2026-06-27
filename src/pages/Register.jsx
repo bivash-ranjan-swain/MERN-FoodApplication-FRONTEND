@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
@@ -13,11 +13,15 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   async function handelRegister(e) {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:8800/api/auth/register", { fullName, phoneNo, gender, email, password }, { withCredentials: true })
       console.log(response);
+      navigate("/login");
+
     } catch (error) {
       console.log(error.message || error);
     }

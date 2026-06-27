@@ -1,10 +1,37 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./LoginPage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate()
+
+  const handelLogin = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post("http://localhost:8800/api/auth/login", { email, password }, { withCredentials: true });
+      alert(response.data.messge);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+
+
+      if (response.data.user.role == "admin") {
+        navigate("/admin/dashboard")
+      } else {
+        navigate("/")
+      }
+    } catch (error) {
+      console.log(error.messge || error);
+    }
+  }
+
+
 
   return (
     <section className="login-section">
@@ -14,12 +41,14 @@ const LoginPage = () => {
           <p>Login to your account and continue your journey.</p>
         </div>
 
-        <form className="login-form">
+        <form className="login-form" onSubmit={handelLogin}>
           <div className="input-group">
             <label>Email Address</label>
             <input
               type="email"
               placeholder="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -30,6 +59,8 @@ const LoginPage = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <span

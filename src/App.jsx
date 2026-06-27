@@ -9,30 +9,49 @@ import BookTable from "./components/BookTable"
 import LoginPage from "./pages/LoginPage"
 import Register from "./pages/Register"
 import OurMenu from "./pages/OurMenu"
-function App() {
+import ProtectedRoutes from "./ProtectedRoutes"
+import Dashboard from "./components/Dashboard"
+import AdminPanel from "./admin/AdminPanel"
+
+function Layout() {
+  const isAdminRoue = location.pathname.startsWith("/admin");
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <div style={{ marginTop: "80px" }}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/service" element={<ServicePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/booktable" element={<BookTable />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/our-menu" element={<OurMenu />} />
 
-
-          </Routes>
-        </div>
-
-        <Footer />
-      </BrowserRouter>
+      {!isAdminRoue && <Navbar />}
+      <div style={{ marginTop: isAdminRoue ? "0px" : "80px" }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/service" element={<ServicePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/booktable" element={<BookTable />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/our-menu" element={<OurMenu />} />
+          <Route path="/admin" element={<ProtectedRoutes />}>
+            <Route path="" element={<AdminPanel />}>
+              <Route
+                path="dashboard"
+                element={<Dashboard />}
+              />
+            </Route>
+          </Route>
+        </Routes>
+      </div>
+      {!isAdminRoue && <Footer />}
 
     </>
+  )
+}
+
+
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   )
 }
 

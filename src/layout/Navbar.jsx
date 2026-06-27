@@ -55,7 +55,8 @@ function Navbar() {
             </div>
             <div className="mobile-btn">
               <button className="Book-btn" onClick={() => { navigate("/booktable"); HideMobileMenu() }}>Book Your Order</button>
-              <button className="ls-btn" onClick={() => { () => navigate("/login"); HideMobileMenu() }}>Login/SignUp</button>
+              
+              <button className="ls-btn" onClick={() => { navigate("/login"); HideMobileMenu() }}>Login/SignUp</button>
             </div>
           </div>
         )}
