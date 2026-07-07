@@ -9,9 +9,11 @@ import BookTable from "./components/BookTable"
 import LoginPage from "./pages/LoginPage"
 import Register from "./pages/Register"
 import OurMenu from "./pages/OurMenu"
+import OurFoods from "./pages/OurFoods"
 import ProtectedRoutes from "./ProtectedRoutes"
 import Dashboard from "./components/Dashboard"
 import AdminPanel from "./admin/AdminPanel"
+import FoodDetailsPage from "./pages/FoodDetailsPage"
 
 function Layout() {
   const isAdminRoue = location.pathname.startsWith("/admin");
@@ -29,12 +31,13 @@ function Layout() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/our-menu" element={<OurMenu />} />
+          <Route path="/our-foods" element={<OurFoods />} />
+          <Route path="details/:id" element={<FoodDetailsPage />} />
           <Route path="/admin" element={<ProtectedRoutes />}>
             <Route path="" element={<AdminPanel />}>
               <Route
                 path="dashboard"
-                element={<Dashboard />}
-              />
+                element={<Dashboard />} />
             </Route>
           </Route>
         </Routes>

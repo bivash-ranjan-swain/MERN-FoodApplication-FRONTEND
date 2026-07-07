@@ -1,10 +1,55 @@
+import { useState } from "react";
+import axios from "axios";
 import "./ContactPage.css";
 
 function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const response = await axios.post(
+        "http://localhost:8800/api/contact/create",
+        formData
+      );
+
+      alert(response.data.message);
+
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      alert(error.response?.data?.message || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="contact-section">
       <div className="contact-header">
         <h1>Contact Us</h1>
+
         <p>
           We consider all the drivers of change gives you the components
           <br />
@@ -13,34 +58,67 @@ function ContactPage() {
       </div>
 
       <div className="contact-card">
-        <form className="contact-form">
+        <form className="contact-form" onSubmit={handleSubmit}>
           <div className="input-row">
             <div className="input-group">
               <label>Name</label>
-              <input type="text" placeholder="Enter your name" />
+
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="input-group">
               <label>Email</label>
-              <input type="email" placeholder="Enter email address" />
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter email address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </div>
           </div>
 
           <div className="input-group">
             <label>Subject</label>
-            <input type="text" placeholder="Write a subject" />
+
+            <input
+              type="text"
+              name="subject"
+              placeholder="Write a subject"
+              value={formData.subject}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div className="input-group">
             <label>Message</label>
+
             <textarea
               rows="6"
+              name="message"
               placeholder="Write your message"
+              value={formData.message}
+              onChange={handleChange}
+              required
             ></textarea>
           </div>
 
-          <button type="submit" className="send-btn">
-            Send
+          <button
+            type="submit"
+            className="send-btn"
+            disabled={loading}
+          >
+            {loading ? "Sending..." : "Send"}
           </button>
         </form>
       </div>

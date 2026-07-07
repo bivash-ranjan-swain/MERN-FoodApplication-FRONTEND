@@ -20,7 +20,7 @@ function Navbar() {
         {/* left Div */}
         <div className="nav-left">
           <img className="Logo" src={Logo} alt="My Logo" />
-          <h1 className="heading">Manoj Food-Corner</h1>
+          <h1 className="heading">BIVU FOOD UNIVERSE</h1>
         </div>
 
         {/* Middle */}
@@ -28,6 +28,7 @@ function Navbar() {
           <Link to="/">Home</Link>
           <Link to="/service">Service</Link>
           <Link to="/about">About Us</Link>
+          <Link to="/our-foods">Our Foods</Link>
           <Link to="/contact">Contact Us</Link>
         </div>
 
@@ -51,6 +52,7 @@ function Navbar() {
               <Link onClick={HideMobileMenu} to="/">Home</Link>
               <Link onClick={HideMobileMenu} to="/service">Service</Link>
               <Link onClick={HideMobileMenu} to="/about">About Us</Link>
+              <Link onClick={HideMobileMenu} to="/our-food">Our Foods</Link>
               <Link onClick={HideMobileMenu} to="/contact">Contact Us</Link>
             </div>
             <div className="mobile-btn">

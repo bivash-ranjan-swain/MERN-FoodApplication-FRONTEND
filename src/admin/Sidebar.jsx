@@ -6,12 +6,7 @@ import axios from "axios";
 const NAV_ITEMS = [
   { path: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/admin/food", label: "Food", icon: Users },
-
-
 ];
-
-
-
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate()

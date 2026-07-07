@@ -1,7 +1,9 @@
+import OurFoods from "./OurFoods"
+
 function ServicePage() {
   return (
     <>
-      <h1>ServicePage</h1>
+      <OurFoods />
     </>
   )
 }
