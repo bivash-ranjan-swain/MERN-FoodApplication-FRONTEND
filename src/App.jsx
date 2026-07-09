@@ -1,27 +1,29 @@
-import Navbar from "./layout/Navbar"
-import Footer from "./layout/Footer"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import HomePage from "./pages/HomePage"
-import ServicePage from "./pages/ServicePage"
-import AboutPage from "./pages/AboutPage"
-import ContactPage from "./pages/ContactPage"
-import BookTable from "./components/BookTable"
-import LoginPage from "./pages/LoginPage"
-import Register from "./pages/Register"
-import OurMenu from "./pages/OurMenu"
-import OurFoods from "./pages/OurFoods"
-import ProtectedRoutes from "./ProtectedRoutes"
-import Dashboard from "./components/Dashboard"
-import AdminPanel from "./admin/AdminPanel"
-import FoodDetailsPage from "./pages/FoodDetailsPage"
+import Navbar from "./layout/Navbar.jsx";
+import Footer from "./layout/Footer.jsx";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import HomePage from "./pages/HomePage.jsx";
+import ServicePage from "./pages/ServicePage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
+import BookTable from "./components/BookTable.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import Register from "./pages/Register.jsx";
+import OurMenu from "./pages/OurMenu.jsx";
+import OurFoods from "./pages/OurFoods.jsx";
+import ProtectedRoutes from "./ProtectedRoutes.jsx";
+import Dashboard from "./components/Dashboard.jsx";
+import AdminPanel from "./admin/AdminPanel.jsx";
+import FoodDetailsPage from "./pages/FoodDetailsPage.jsx";
 
 function Layout() {
-  const isAdminRoue = location.pathname.startsWith("/admin");
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
     <>
-
-      {!isAdminRoue && <Navbar />}
-      <div style={{ marginTop: isAdminRoue ? "0px" : "80px" }}>
+      {!isAdminRoute && <Navbar />}
+      <div style={{ marginTop: isAdminRoute ? "0px" : "80px" }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/service" element={<ServicePage />} />
@@ -32,30 +34,27 @@ function Layout() {
           <Route path="/register" element={<Register />} />
           <Route path="/our-menu" element={<OurMenu />} />
           <Route path="/our-foods" element={<OurFoods />} />
-          <Route path="details/:id" element={<FoodDetailsPage />} />
+          <Route path="/details/:id" element={<FoodDetailsPage />} />
           <Route path="/admin" element={<ProtectedRoutes />}>
             <Route path="" element={<AdminPanel />}>
-              <Route
-                path="dashboard"
-                element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
             </Route>
           </Route>
         </Routes>
       </div>
-      {!isAdminRoue && <Footer />}
-
+      {!isAdminRoute && <Footer />}
     </>
-  )
+  );
 }
-
-
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
-  )
+    <AuthProvider>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

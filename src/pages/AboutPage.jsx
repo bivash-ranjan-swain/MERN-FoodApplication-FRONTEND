@@ -1,5 +1,5 @@
-import Video from "../components/Video"
-import WeProvide from "../components/WeProvide"
+import Video from "../components/Video.jsx"
+import WeProvide from "../components/WeProvide.jsx"
 
 function AboutPage() {
   return (

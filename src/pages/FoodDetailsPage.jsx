@@ -9,23 +9,34 @@ const FoodDetailsPage = () => {
   const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const getSingleFood = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8800/api/food/get-single/${id}`
-      );
-
-      setFood(response.data.food);
-    } catch (error) {
-      console.log(error.response?.data || error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    let ignore = false;
+
+    const getSingleFood = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8800/api/food/get-single/${id}`,
+        );
+        if (!ignore) {
+          setFood(response.data.food);
+        }
+      } catch (error) {
+        if (!ignore) {
+          console.log(error.response?.data || error.message);
+        }
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    };
+
     getSingleFood();
-  }, []);
+
+    return () => {
+      ignore = true;
+    };
+  }, [id]);
 
   if (loading) {
     return (
@@ -46,10 +57,7 @@ const FoodDetailsPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen py-10 px-4">
       <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-
         <div className="grid lg:grid-cols-2">
-
-          {/* Image */}
           <div>
             <img
               src={food.image}
@@ -58,9 +66,7 @@ const FoodDetailsPage = () => {
             />
           </div>
 
-          {/* Details */}
           <div className="p-6 md:p-10 flex flex-col justify-center">
-
             <h1 className="text-3xl md:text-5xl font-bold text-gray-800">
               {food.name}
             </h1>
@@ -70,9 +76,8 @@ const FoodDetailsPage = () => {
             </p>
 
             <div className="mt-8 flex items-center gap-5 flex-wrap">
-
               <h2 className="text-4xl font-bold text-green-600">
-                ₹{food.discoutPrice}
+                ₹{food.discountPrice}
               </h2>
 
               <h3 className="text-2xl text-gray-400 line-through">
@@ -80,18 +85,12 @@ const FoodDetailsPage = () => {
               </h3>
 
               <span className="bg-red-100 text-red-600 px-4 py-2 rounded-full font-semibold">
-                Save ₹
-                {Number(food.actualPrice) -
-                  Number(food.discoutPrice)}
+                Save ₹{Number(food.actualPrice) - Number(food.discountPrice)}
               </span>
-
             </div>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-
-              <button
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold duration-300"
-              >
+              <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold duration-300">
                 Order Now
               </button>
 
@@ -101,41 +100,28 @@ const FoodDetailsPage = () => {
               >
                 Back
               </button>
-
             </div>
 
             <div className="mt-10 border-t pt-6">
-
-              <h3 className="text-xl font-bold mb-3">
-                Product Information
-              </h3>
+              <h3 className="text-xl font-bold mb-3">Product Information</h3>
 
               <div className="space-y-2 text-gray-600">
-
                 <p>
                   <strong>Food Name :</strong> {food.name}
                 </p>
-
                 <p>
                   <strong>Original Price :</strong> ₹{food.actualPrice}
                 </p>
-
                 <p>
-                  <strong>Offer Price :</strong> ₹{food.discoutPrice}
+                  <strong>Offer Price :</strong> ₹{food.discountPrice}
                 </p>
-
                 <p>
                   <strong>You Save :</strong> ₹
-                  {Number(food.actualPrice) -
-                    Number(food.discoutPrice)}
+                  {Number(food.actualPrice) - Number(food.discountPrice)}
                 </p>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
       </div>
     </div>

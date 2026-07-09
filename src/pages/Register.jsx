@@ -13,7 +13,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   async function handelRegister(e) {
     e.preventDefault();
