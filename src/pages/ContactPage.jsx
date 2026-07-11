@@ -7,6 +7,7 @@ function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phoneNo: "",
     subject: "",
     message: "",
   });
@@ -27,7 +28,7 @@ function ContactPage() {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:8800/api/contact/create",
+        "http://localhost:8800/api/contact/create-contact",
         formData
       );
 
@@ -36,6 +37,7 @@ function ContactPage() {
       setFormData({
         name: "",
         email: "",
+        phoneNo: "",
         subject: "",
         message: "",
       });
@@ -88,6 +90,19 @@ function ContactPage() {
                   required
                 />
               </div>
+            </div>
+
+            <div className="input-group">
+              <label>Phone Number</label>
+
+              <input
+                type="tel"
+                name="phoneNo"
+                placeholder="Enter phone number"
+                value={formData.phoneNo}
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="input-group">
