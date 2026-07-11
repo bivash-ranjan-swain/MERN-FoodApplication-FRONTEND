@@ -41,7 +41,7 @@ function Navbar() {
 
       {/* Middle */}
       <div className="nav-middle">
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
         <Link to="/service">Services</Link>
         <Link to="/about">About Us</Link>
         <Link to="/our-foods">Our Foods</Link>
@@ -52,9 +52,9 @@ function Navbar() {
       <div className="nav-right">
         <button
           className="Book-btn"
-          onClick={() => navigate("/booktable")}
+          onClick={() => navigate("/book-table")}
         >
-          Book Your Order
+          Book Your Table
         </button>
 
         <CgProfile
@@ -90,7 +90,7 @@ function Navbar() {
               Home
             </Link>
 
-            <Link onClick={HideMobileMenu} to="/service">
+            <Link onClick={HideMobileMenu} to="/services">
               Services
             </Link>
 

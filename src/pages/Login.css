@@ -81,3 +81,14 @@
   font-weight: 600;
   text-decoration: none;
 }
+
+.success-message {
+  background-color: #e6f4ea;
+  color: #1e7e34;
+  border: 1px solid #b7dfc0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-align: center;
+}

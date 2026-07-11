@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../layout/Navbar";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,85 +29,88 @@ const Register = () => {
 
   }
   return (
-    <section className="register-section">
-      <div className="register-container">
-        <div className="register-header">
-          <h1>Create Account</h1>
-          <p>Register your account to get started.</p>
-        </div>
-
-        <form className="register-form" onSubmit={handelRegister}>
-          <div className="input-group">
-            <label>Full Name</label>
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-            />
+    <>
+      <Navbar />
+      <section className="register-section">
+        <div className="register-container">
+          <div className="register-header">
+            <h1>Create Account</h1>
+            <p>Register your account to get started.</p>
           </div>
 
-          <div className="input-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Phone Number</label>
-            <input
-              type="tel"
-              placeholder="Enter your phone number"
-              value={phoneNo}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Gender</label>
-            <select value={gender}
-              onChange={(e) => setGender(e.target.value)}>
-              <option value="">Select Gender</option>
-              <option value={"male"}>Male</option>
-              <option value={"female"}>Female</option>
-              <option value={"others"}>Other</option>
-            </select>
-          </div>
-
-          <div className="input-group">
-            <label>Password</label>
-
-            <div className="password-wrapper">
+          <form className="register-form" onSubmit={handelRegister}>
+            <div className="input-group">
+              <label>Full Name</label>
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="text"
+                placeholder="Enter your full name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
               />
-
-              <span
-                className="password-icon"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
             </div>
-          </div>
 
-          <button type="submit" className="register-btn">
-            Create Account
-          </button>
+            <div className="input-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-          <p className="login-text">
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
-        </form>
-      </div>
-    </section>
+            <div className="input-group">
+              <label>Phone Number</label>
+              <input
+                type="tel"
+                placeholder="Enter your phone number"
+                value={phoneNo}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+
+            <div className="input-group">
+              <label>Gender</label>
+              <select value={gender}
+                onChange={(e) => setGender(e.target.value)}>
+                <option value="">Select Gender</option>
+                <option value={"male"}>Male</option>
+                <option value={"female"}>Female</option>
+                <option value={"others"}>Other</option>
+              </select>
+            </div>
+
+            <div className="input-group">
+              <label>Password</label>
+
+              <div className="password-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <span
+                  className="password-icon"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+            </div>
+
+            <button type="submit" className="register-btn">
+              Create Account
+            </button>
+
+            <p className="login-text">
+              Already have an account? <Link to="/login">Login</Link>
+            </p>
+          </form>
+        </div>
+      </section>
+    </>
   );
 };
 

@@ -1,60 +1,42 @@
-import Navbar from "./layout/Navbar.jsx";
-import Footer from "./layout/Footer.jsx";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-import HomePage from "./pages/HomePage.jsx";
-import ServicePage from "./pages/ServicePage.jsx";
-import AboutPage from "./pages/AboutPage.jsx";
-import ContactPage from "./pages/ContactPage.jsx";
-import BookTable from "./components/BookTable.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import Register from "./pages/Register.jsx";
-import OurMenu from "./pages/OurMenu.jsx";
-import OurFoods from "./pages/OurFoods.jsx";
-import ProtectedRoutes from "./ProtectedRoutes.jsx";
-import Dashboard from "./components/Dashboard.jsx";
-import AdminPanel from "./admin/AdminPanel.jsx";
-import FoodDetailsPage from "./pages/FoodDetailsPage.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import HomePage from './pages/HomePage.jsx'
+import ServicePage from './pages/ServicePage.jsx'
+import BookTable from './components/BookTable.jsx'
+import ExploreMenu from './pages/OurMenu.jsx'
+import Signup from './pages/Signup.jsx'
+import Login from './pages/Login.jsx'
+import Checkout from "./pages/CheckOutPage.jsx"
+import AboutPage from "./pages/AboutPage.jsx"
+import Contact from "./pages/ContactPage.jsx"
+import Facilities from "./components/Facilities.jsx"
+import OurFoods from "./pages/OurFoods.jsx"
+import ServiceDetailsPage from "./pages/ServiceDetailsPage.jsx"
+import ProtectedRoute from "./components/ProtectedRoute.jsx"
 
-function Layout() {
-  const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
-
+const App = () => {
   return (
     <>
-      {!isAdminRoute && <Navbar />}
-      <div style={{ marginTop: isAdminRoute ? "0px" : "80px" }}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/service" element={<ServicePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/booktable" element={<BookTable />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/our-menu" element={<OurMenu />} />
-          <Route path="/our-foods" element={<OurFoods />} />
-          <Route path="/details/:id" element={<FoodDetailsPage />} />
-          <Route path="/admin" element={<ProtectedRoutes />}>
-            <Route path="" element={<AdminPanel />}>
-              <Route path="dashboard" element={<Dashboard />} />
-            </Route>
-          </Route>
-        </Routes>
-      </div>
-      {!isAdminRoute && <Footer />}
-    </>
-  );
-}
-
-function App() {
-  return (
-    <AuthProvider>
       <BrowserRouter>
-        <Layout />
+          <Routes>
+            
+            <Route path='/' element={<Signup />} />
+            <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+            <Route path="/about" element={<ProtectedRoute><AboutPage /></ProtectedRoute>} />
+            <Route path="/service" element={<ProtectedRoute><ServicePage /></ProtectedRoute>} />
+            <Route path="/book-table" element={<ProtectedRoute><BookTable /></ProtectedRoute>} />
+            <Route path="/explore-menu" element={<ProtectedRoute><ExploreMenu /></ProtectedRoute>} />
+            <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+            <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
+            <Route path="/facilities" element={<ProtectedRoute><Facilities /></ProtectedRoute>} />
+            <Route path="/our-foods" element={<ProtectedRoute><OurFoods /></ProtectedRoute>} />
+            <Route path="/service-details:_id" element={<ProtectedRoute><ServiceDetailsPage /></ProtectedRoute>} />
+            
+            <Route path="/signup" element={<Signup />} />
+            <Route path="*" element={<Login />} />
+          </Routes>
       </BrowserRouter>
-    </AuthProvider>
-  );
+    </>
+  )
 }
 
-export default App;
+export default App

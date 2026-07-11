@@ -4,10 +4,12 @@ import HeroSection from "../components/HeroSection"
 import Weoffer from "../components/Weoffer"
 import WeProvide from "../components/WeProvide"
 import WhatOurCustomer from "../components/WhatOurCustomer"
+import Navbar from "../layout/Navbar"
 
 function HomePage() {
   return (
     <>
+      <Navbar />
       <HeroSection />
       <BrowseMenu />
       <WeProvide />

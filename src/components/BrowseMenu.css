@@ -1,68 +1,181 @@
-.Browse-Menu-div {
-  width: 100%;
-  padding: 50px 7%;
-}
-.Browse-Menu-div .Heading {
-  text-align: center;
-  font-size: 3rem;
-  font-style: italic;
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+.browse-menu {
+  --bg: #16211d;
+  --bg-soft: #1d2b25;
+  --paper: #fbf7ec;
+  --ink: #22281f;
+  --ink-soft: #5b6156;
+  --line: #d8d0bc;
+  --paprika: #c1440e;
+  --paprika-dark: #9c360b;
+  --mustard: #e3a008;
+
+  background: var(--bg);
+  padding: 64px 24px 80px;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--paper);
 }
 
-.Browse-Menu-div .card-div {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+.browse-menu-heading {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 44px;
 }
-.card-div .card {
-  width: 22%;
-  height: 100%;
-  border: 1px solid rgb(234, 213, 213);
+
+.browse-menu .eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paprika);
+  margin: 0 0 10px;
+}
+
+.browse-menu .Heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.browse-sub {
+  display: block;
+  font-size: 14px;
+  color: rgba(251, 247, 236, 0.65);
+}
+
+.card-div {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 28px 22px 26px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 20px;
-  padding: 20px 2%;
-  border-radius: 7px;
+  text-align: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.card .round {
-  width: 60px;
-  height: 60px;
-  background-color: rgb(234, 213, 213);
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35);
+}
+
+.round {
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
+  background: rgba(193, 68, 14, 0.08);
+  border: 1.5px solid rgba(193, 68, 14, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
-}
-.round img {
-  width: 70%;
-}
-.card .card-head {
-  font-size: 1.5rem;
-  text-align: center;
-}
-.card .card-para {
-  font-size: 1.1rem;
-  text-align: center;
-}
-.card .card-btn {
-  padding: 0.5rem 1.5rem;
-  font-size: 1.1rem;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  color: red;
-  font-weight: 500;
+  overflow: hidden;
+  margin-bottom: 18px;
 }
 
-@media (max-width: 576px) {
-  .Browse-Menu-div .card-div {
-    flex-direction: column;
-    gap: 30px;
+.round img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.round-icon {
+  width: 34px;
+  height: 34px;
+  color: var(--paprika);
+}
+
+.round-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.card-time {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin: 0 0 6px;
+}
+
+.card-head {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.card-para {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+  min-height: 62px;
+}
+
+/* Signature element: a four-quarter day strip, one segment lit per card */
+.day-strip {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.day-strip-seg {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+}
+
+.day-strip-seg.active {
+  background: var(--paprika);
+}
+
+.card-btn {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--paper);
+  background: var(--paprika);
+  border: none;
+  border-radius: 9px;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.card-btn:hover {
+  background: var(--paprika-dark);
+}
+
+.card-btn:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 980px) {
+  .card-div {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .card-div .card {
-    width: 100%;
+}
+
+@media (max-width: 540px) {
+  .browse-menu {
+    padding: 48px 16px 60px;
+  }
+
+  .card-div {
+    grid-template-columns: 1fr;
+    max-width: 340px;
   }
 }

@@ -1,138 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  --nav-height: 88px;
+}
+
 .Navbar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 7%;
-  align-items: center;
+  --bg: #16211d;
+  --bg-soft: #1d2b25;
+  --paper: #fbf7ec;
+  --ink: #22281f;
+  --ink-soft: #5b6156;
+  --line: #d8d0bc;
+  --paprika: #c1440e;
+  --paprika-dark: #9c360b;
+  --mustard: #e3a008;
+
   position: fixed;
-  background-color: white;
   top: 0;
-}
-/* ---------------------LEFT-START--------------------- */
-
-.Navbar .nav-left {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-.nav-left .Logo {
-  width: 12%;
-}
-.nav-left .heading {
-  font-size: 1.2rem;
-}
-
-/* ---------------------LEFT-END--------------------- */
-/* ---------------------MIDDLE-START--------------------- */
-.Navbar .nav-middle {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-}
-.nav-middle a {
-  text-decoration: none;
-  color: black;
-  font-size: 1.1rem;
-}
-
-/* ---------------------MIDDLE-END--------------------- */
-
-/* ---------------------RIGHT-START--------------------- */
-
-.Navbar .nav-right {
-  width: 30%;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 5px;
-}
-.nav-right .Book-btn {
-  background-color: rgb(241, 10, 10);
-  border: none;
-  color: white;
-  padding: 0.7rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 9px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.nav-right .Book-btn:active {
-  transform: scale(0.95);
-}
-.nav-right .icon {
-  cursor: pointer;
-}
-
-.Navbar .menu-icon {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
-
-/* Mobile Menu csss Start */
-.Navbar .mobile-menu {
-  position: absolute;
-  width: 100%;
-  padding: 12px 7%;
-  background-color: white;
-  margin-top: 330px;
   left: 0;
-}
-.mobile-menu .mobile-menu-item {
+  right: 0;
+  height: var(--nav-height);
+  z-index: 100;
+
+  background: rgba(22, 33, 29, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1.5px dashed rgba(216, 208, 188, 0.25);
+
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--paper);
+}
+
+/* ---------- Left: logo ---------- */
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-left .Logo {
+  height: 42px;
+  width: 42px;
+  object-fit: contain;
+}
+
+.nav-left .heading {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ---------- Middle: links ---------- */
+
+.nav-middle {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-middle a {
+  position: relative;
+  color: rgba(251, 247, 236, 0.8);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 6px 0;
+  transition: color 0.15s ease;
+}
+
+.nav-middle a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--paprika);
+  transition: width 0.2s ease;
+}
+
+.nav-middle a:hover {
+  color: var(--paper);
+}
+
+.nav-middle a:hover::after {
+  width: 100%;
+}
+
+/* ---------- Right: actions ---------- */
+
+.nav-right {
+  display: flex;
+  align-items: center;
   gap: 20px;
 }
-.mobile-menu-item a {
-  text-decoration: none;
-  font-size: 1.1rem;
+
+.Book-btn {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--paper);
+  background: var(--paprika);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
-.mobile-menu .mobile-btn {
+
+.Book-btn:hover {
+  background: var(--paprika-dark);
+}
+
+.Book-btn:active {
+  transform: scale(0.96);
+}
+
+.nav-right .icon {
+  color: var(--paper);
+  transition: color 0.15s ease;
+}
+
+.nav-right .icon:hover {
+  color: var(--paprika);
+}
+
+/* ---------- Mobile menu icon ---------- */
+
+.menu-icon {
+  display: none;
+  color: var(--paper);
+}
+
+/* ---------- Mobile dropdown panel ---------- */
+
+.mobile-menu {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  background: var(--bg-soft);
+  border-bottom: 1.5px dashed rgba(216, 208, 188, 0.25);
+  padding: 24px 28px 32px;
   display: flex;
-  gap: 30px;
-  margin-top: 30px;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 99;
+  animation: navDrop 0.18s ease;
+}
+
+@keyframes navDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mobile-menu-item a {
+  color: var(--paper);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mobile-menu-item a:hover {
+  color: var(--paprika);
+}
+
+.mobile-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .mobile-btn .Book-btn {
-  padding: 0.5rem 1rem;
-  background-color: red;
-  color: white;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 9px;
+  width: 100%;
+  padding: 12px;
 }
+
 .mobile-btn .ls-btn {
-  padding: 0.5rem 1rem;
-  background-color: blue;
-  color: white;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 9px;
+  width: 100%;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--paper);
+  background: transparent;
+  border: 1.5px solid rgba(251, 247, 236, 0.3);
+  border-radius: 30px;
+  padding: 11px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-/* Media query Start Here */
-
-@media (max-width: 576px) {
-  .nav-left .heading {
-    display: none;
-  }
-  .Navbar .nav-middle {
-    display: none;
-  }
-  .Navbar .nav-right {
-    display: none;
-  }
-  .nav-left .Logo {
-    width: 20%;
-  }
+.mobile-btn .ls-btn:hover {
+  border-color: var(--paprika);
+  color: var(--paprika);
 }
-@media (min-width: 577px) {
-  .Navbar .menu-icon {
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .nav-middle,
+  .nav-right {
     display: none;
+  }
+
+  .menu-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .Navbar {
+    padding: 0 20px;
   }
 }

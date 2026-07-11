@@ -43,6 +43,7 @@
   font-size: 1.2rem;
   margin-top: 20px;
   background-color: transparent;
+  cursor: pointer;
 }
 
 @media (max-width: 576px) {

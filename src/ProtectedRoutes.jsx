@@ -1,14 +1,18 @@
-import { Navigate, Outlet } from "react-router-dom"
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContextStore";
 
-const ProtectedRoutes = () => {
-  const user = JSON.parse(localStorage.getItem("user"))
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth();
 
-  if (!user || user.role !== "admin") {
-    return <Navigate to={"/login"} />;
+  if (loading) {
+    return <div>Loading...</div>; // or a spinner component
   }
-  return (
-    <Outlet />
-  )
-}
 
-export default ProtectedRoutes
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
+export default ProtectedRoute;

@@ -1,65 +1,164 @@
-@import url("https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap");
+/* ServicePage.css */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
 
-:root {
-  --color-ink: #1c2321;
-  --color-bg: #f5efe0;
-  --color-parchment: #fbf6ec;
-  --color-gold: #b8863b;
-  --color-gold-soft: #e4cfa0;
-  --color-berry: #c8556c;
-  --color-berry-dark: #a63f54;
-  --color-muted: #6b6459;
+.service-section {
+  --ink: #1b1030;
+  --ink-raised: #241640;
+  --ink-soft: #a89bc7;
+  --ink-line: rgba(255, 255, 255, 0.14);
+  --paper: #fffbf2;
+  --paper-line: #e6dcc2;
+  --paper-ink: #2a2140;
+  --marigold: #f2a93b;
+  --sindoor: #e2445c;
 
-  --font-display: "Spectral", Georgia, serif;
-  --font-body: "Work Sans", -apple-system, sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  background: radial-gradient(120% 140% at 15% -10%, #2a1a4a 0%, var(--ink) 55%);
+  color: var(--paper);
+  font-family: "Public Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 5rem 6vw 6rem;
+  min-height: 100vh;
 }
 
-* {
+.service-section *,
+.service-section *::before,
+.service-section *::after {
   box-sizing: border-box;
 }
 
-.service-section {
-  background: var(--color-bg);
-  min-height: 100vh;
-  padding: 72px 24px 96px;
-  font-family: var(--font-body);
-  color: var(--color-ink);
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
-/* ---------- Header ---------- */
+/* ---------- Hero ---------- */
 
 .service-header {
-  max-width: 640px;
-  margin: 0 auto 56px;
-  text-align: center;
+  max-width: 44rem;
+  margin-bottom: 2.75rem;
 }
 
 .service-eyebrow {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-berry-dark);
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--color-gold-soft);
-  margin-bottom: 20px;
+  color: var(--marigold);
+  padding-bottom: 1.1rem;
+}
+
+.service-eyebrow::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--sindoor);
+  box-shadow: 0 0 0 3px rgba(226, 68, 92, 0.2);
 }
 
 .service-header h1 {
-  font-family: var(--font-display);
+  font-family: "Fraunces", Georgia, serif;
   font-weight: 600;
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  margin: 0 0 14px;
+  font-size: clamp(2.25rem, 4.2vw, 3.4rem);
+  line-height: 1.05;
   letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+  color: #fffdf8;
 }
 
 .service-header p {
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.6;
-  color: var(--color-muted);
+  color: var(--ink-soft);
   margin: 0;
+  max-width: 34rem;
+}
+
+/* Torn-ticket perforation between hero and the board */
+.perforation {
+  height: 1px;
+  margin-bottom: 3rem;
+  background-image: linear-gradient(
+    to right,
+    var(--ink-line) 0,
+    var(--ink-line) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  background-size: 20px 1px;
+}
+
+/* ---------- Status states (loading handled via skeletons, error / empty here) ---------- */
+
+.service-status {
+  max-width: 26rem;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 2.75rem 2rem;
+  border-radius: 18px;
+  border: 1px dashed var(--ink-line);
+  background: var(--ink-raised);
+}
+
+.status-stamp {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sindoor);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  transform: rotate(-3deg);
+  margin-bottom: 1.1rem;
+}
+
+.status-stamp--muted {
+  color: var(--ink-soft);
+}
+
+.service-status p {
+  margin: 0 0 1rem;
+  color: #fffdf8;
+  font-size: 1rem;
+}
+
+.service-status-note {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.retry-btn {
+  font-family: "Public Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink);
+  background: var(--marigold);
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.retry-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -8px rgba(242, 169, 59, 0.6);
+}
+
+.retry-btn:focus-visible {
+  outline: 2px solid var(--marigold);
+  outline-offset: 3px;
 }
 
 /* ---------- Grid ---------- */
@@ -67,41 +166,35 @@
 .service-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 32px 28px;
-  max-width: 1180px;
-  margin: 0 auto;
+  gap: 2.25rem 1.75rem;
 }
 
 /* ---------- Ticket card ---------- */
 
 .service-card {
-  background: var(--color-parchment);
-  border-radius: 10px;
-  overflow: visible;
-  cursor: pointer;
   position: relative;
-  box-shadow: 0 1px 2px rgba(28, 35, 33, 0.06), 0 8px 20px rgba(28, 35, 33, 0.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  display: flex;
-  flex-direction: column;
+  background: var(--paper);
+  color: var(--paper-ink);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 18px 30px -20px rgba(0, 0, 0, 0.6);
 }
 
-.service-card:hover,
-.service-card:focus-visible {
-  transform: translateY(-4px) rotate(-0.3deg);
-  box-shadow: 0 4px 10px rgba(28, 35, 33, 0.08), 0 16px 32px rgba(28, 35, 33, 0.1);
+.service-card:hover {
+  transform: translateY(-4px) rotate(-0.4deg);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 26px 40px -18px rgba(0, 0, 0, 0.7);
 }
 
 .service-card:focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--marigold);
   outline-offset: 3px;
 }
 
 .service-media {
-  height: 180px;
-  overflow: hidden;
-  border-radius: 10px 10px 0 0;
-  background: var(--color-gold-soft);
+  height: 168px;
+  background: var(--paper-ink);
 }
 
 .service-img {
@@ -109,30 +202,23 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
 }
 
-.service-card:hover .service-img {
-  transform: scale(1.04);
-}
-
-/* the signature perforation */
-
+/* Perforation line with punched notches, like a torn ticket stub */
 .ticket-divider {
   position: relative;
   height: 0;
-  border-top: 2px dashed var(--color-gold-soft);
+  border-top: 1px dashed var(--paper-line);
   margin: 0 14px;
 }
 
 .notch {
   position: absolute;
-  top: 50%;
+  top: -9px;
   width: 18px;
   height: 18px;
-  background: var(--color-bg);
   border-radius: 50%;
-  transform: translateY(-50%);
+  background: var(--ink);
 }
 
 .notch-left {
@@ -144,166 +230,226 @@
 }
 
 .service-info {
-  padding: 18px 20px 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  padding: 1.3rem 1.4rem 1.5rem;
 }
 
 .service-info-top {
-  flex: 1;
+  min-height: 4.6rem;
 }
 
 .service-name {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-family: "Fraunces", Georgia, serif;
   font-weight: 600;
-  margin: 0 0 8px;
+  font-size: 1.2rem;
+  margin: 0 0 0.35rem;
+  color: var(--paper-ink);
 }
 
 .service-desc {
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: var(--color-muted);
-  margin: 0 0 18px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #5d5476;
+  margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  /* -webkit-line-clamp: 2; */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .service-stub {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: 12px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(28, 35, 33, 0.08);
+  gap: 1rem;
+  margin-top: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--paper-line);
 }
 
 .stub-fare {
   display: flex;
   flex-direction: column;
+  gap: 0.15rem;
 }
 
 .stub-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: #8b7fa8;
 }
 
 .stub-price {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: var(--color-ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--sindoor);
+  font-variant-numeric: tabular-nums;
+}
+
+.stub-code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: #a99fc2;
+  letter-spacing: 0.04em;
 }
 
 .view-btn {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-family: "Public Sans", sans-serif;
   font-weight: 600;
-  color: #fff;
-  background: var(--color-berry);
+  font-size: 0.85rem;
+  color: var(--paper);
+  background: var(--ink);
   border: none;
-  border-radius: 6px;
-  padding: 9px 14px;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
   white-space: nowrap;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .view-btn:hover {
-  background: var(--color-berry-dark);
+  background: var(--sindoor);
 }
 
-.service-card:active .view-btn {
-  transform: scale(0.97);
+.view-btn:focus-visible {
+  outline: 2px solid var(--marigold);
+  outline-offset: 2px;
 }
 
-/* ---------- Status states ---------- */
-
-.service-status {
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  font-family: var(--font-body);
-  color: var(--color-muted);
-  text-align: center;
-  padding: 24px;
+.view-btn span {
+  transition: transform 0.15s ease;
+  display: inline-block;
 }
 
-.service-status.error {
-  color: var(--color-berry-dark);
+.view-btn:hover span {
+  transform: translateX(3px);
 }
 
-.ticket-spinner {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 3px solid var(--color-gold-soft);
-  border-top-color: var(--color-gold);
-  animation: spin 0.9s linear infinite;
+/* Faux barcode strip at the base of every ticket */
+.stub-barcode {
+  margin-top: 1rem;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0.65;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--paper-ink) 0px,
+    var(--paper-ink) 2px,
+    transparent 2px,
+    transparent 4px,
+    var(--paper-ink) 4px,
+    var(--paper-ink) 5px,
+    transparent 5px,
+    transparent 9px
+  );
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+/* ---------- Skeleton loading state ---------- */
+
+.service-card--skeleton {
+  cursor: default;
+  pointer-events: none;
 }
 
-.retry-btn {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--color-ink);
-  background: transparent;
-  border: 1px solid var(--color-gold);
+.skeleton-block {
+  position: relative;
+  overflow: hidden;
+  background: #ece4d2;
   border-radius: 6px;
-  padding: 8px 18px;
-  cursor: pointer;
-  transition: background 0.2s ease;
 }
 
-.retry-btn:hover {
-  background: var(--color-gold-soft);
+.skeleton-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
 }
 
-.service-empty {
-  max-width: 380px;
-  margin: 40px auto 0;
-  text-align: center;
-  color: var(--color-muted);
+.skeleton-media {
+  height: 168px;
+  border-radius: 0;
 }
 
-.service-empty span {
-  display: block;
-  font-size: 0.85rem;
-  margin-top: 6px;
+.skeleton-line {
+  height: 0.85rem;
+  margin-bottom: 0.6rem;
 }
 
-/* ---------- Responsive ---------- */
+.skeleton-line--title {
+  width: 60%;
+  height: 1.1rem;
+  margin-top: 0.2rem;
+}
 
-@media (max-width: 480px) {
-  .service-section {
-    padding: 48px 16px 72px;
-  }
+.skeleton-line--body {
+  width: 90%;
+}
 
-  .service-grid {
-    grid-template-columns: 1fr;
+.skeleton-line--body.short {
+  width: 70%;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .service-card,
-  .service-img,
-  .ticket-spinner {
+  .retry-btn,
+  .view-btn,
+  .view-btn span,
+  .skeleton-block::after {
     transition: none;
     animation: none;
   }
+}
+
+@media (max-width: 640px) {
+  .service-section {
+    padding: 3.5rem 5vw 4rem;
+  }
+
+  .notch-left {
+    left: -18px;
+  }
+
+  .notch-right {
+    right: -18px;
+  }
+}
+
+.skeleton-block {
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-line {
+  height: 14px;
+  margin: 8px 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-title { width: 60%; height: 18px; }
+.skeleton-text { width: 90%; }
+.skeleton-text.short { width: 50%; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }

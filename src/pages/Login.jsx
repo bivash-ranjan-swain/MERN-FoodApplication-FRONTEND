@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import "./Login.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContextStore"; // adjust path as needed
+import "./Auth.css";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,68 +16,82 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setError("");
 
-    const { email, password } = formData;
-    if (!email || !password) {
-      setError("Email and password are required.");
-      return;
-    }
-
     try {
-      setLoading(true);
-      const response = await axios.post(
-        "http://localhost:8800/api/auth/login",
-        formData,
-        { withCredentials: true },
-      );
+      const response = await fetch("http://localhost:8800/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // needed if your backend uses cookies, like get-user does
+        body: JSON.stringify(formData),
+      });
 
-      if (response.data.success) {
-        navigate("/"); // redirect to home/dashboard after login
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data.token) localStorage.setItem("token", data.token);
+
+        // Update context immediately so ProtectedRoute sees the user right away
+        setUser(data.user);
+
+        navigate("/home", { replace: true });
+      } else {
+        setError(data.message || "Invalid credentials.");
       }
     } catch (err) {
-      setError(
-        err.response?.data?.message || "Invalid credentials. Please try again.",
-      );
+      setError("Server error. Please try again later.");
+      console.log(err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="auth-container">
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <h2 className="auth-title">Welcome Back</h2>
+    <>
+      <div className="auth-container">
+        <div className="auth-card">
+          <h2>Welcome Back</h2>
+          <p className="subtitle">Hungry? Log in to your account</p>
 
-        {error && <p className="auth-error">{error}</p>}
+          {error && <div className="error-message">{error}</div>}
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="auth-input"
-        />
+          <form onSubmit={handleSubmit} className="auth-form">
+            <div className="form-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="auth-input"
-        />
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <button type="submit" className="auth-button" disabled={loading}>
-          {loading ? "Logging In..." : "Login"}
-        </button>
+            <button type="submit" className="auth-btn" disabled={loading}>
+              {loading ? "Logging In..." : "Log In"}
+            </button>
+          </form>
 
-        <p className="auth-switch">
-          Don't have an account? <Link to="/signup">Sign Up</Link>
-        </p>
-      </form>
-    </div>
+          <p className="auth-footer">
+            Don't have an account? <Link to="/signup">Sign Up</Link>
+          </p>
+        </div>
+      </div>
+    </>
   );
 };
 

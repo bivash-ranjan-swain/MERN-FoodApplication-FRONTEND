@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Navbar from "../layout/Navbar";
 import "./ContactPage.css";
 
 function ContactPage() {
@@ -46,103 +47,106 @@ function ContactPage() {
   };
 
   return (
-    <section className="contact-section">
-      <div className="contact-header">
-        <h1>Contact Us</h1>
+    <>
+      <Navbar />
+      <section className="contact-section">
+        <div className="contact-header">
+          <h1>Contact Us</h1>
 
-        <p>
-          We consider all the drivers of change gives you the components
-          <br />
-          you need to change to create a truly happens.
-        </p>
-      </div>
+          <p>
+            We consider all the drivers of change gives you the components
+            <br />
+            you need to change to create a truly happens.
+          </p>
+        </div>
 
-      <div className="contact-card">
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="input-row">
+        <div className="contact-card">
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <div className="input-row">
+              <div className="input-group">
+                <label>Name</label>
+
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Email</label>
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter email address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+
             <div className="input-group">
-              <label>Name</label>
+              <label>Subject</label>
 
               <input
                 type="text"
-                name="name"
-                placeholder="Enter your name"
-                value={formData.name}
+                name="subject"
+                placeholder="Write a subject"
+                value={formData.subject}
                 onChange={handleChange}
                 required
               />
             </div>
 
             <div className="input-group">
-              <label>Email</label>
+              <label>Message</label>
 
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter email address"
-                value={formData.email}
+              <textarea
+                rows="6"
+                name="message"
+                placeholder="Write your message"
+                value={formData.message}
                 onChange={handleChange}
                 required
-              />
+              ></textarea>
             </div>
-          </div>
 
-          <div className="input-group">
-            <label>Subject</label>
-
-            <input
-              type="text"
-              name="subject"
-              placeholder="Write a subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Message</label>
-
-            <textarea
-              rows="6"
-              name="message"
-              placeholder="Write your message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="send-btn"
-            disabled={loading}
-          >
-            {loading ? "Sending..." : "Send"}
-          </button>
-        </form>
-      </div>
-
-      <div className="contact-info">
-        <div className="info-box">
-          <h4>Call Us:</h4>
-          <p className="highlight">+1-234-567-8900</p>
+            <button
+              type="submit"
+              className="send-btn"
+              disabled={loading}
+            >
+              {loading ? "Sending..." : "Send"}
+            </button>
+          </form>
         </div>
 
-        <div className="info-box">
-          <h4>Hours:</h4>
-          <p>Mon-Fri: 11am - 8pm</p>
-          <p>Sat, Sun: 9am - 10pm</p>
-        </div>
+        <div className="contact-info">
+          <div className="info-box">
+            <h4>Call Us:</h4>
+            <p className="highlight">+91 96920-74451</p>
+          </div>
 
-        <div className="info-box">
-          <h4>Our Location:</h4>
-          <p>123 Bridge Street</p>
-          <p>Nowhere Land, LA 12345</p>
-          <p>United States</p>
+          <div className="info-box">
+            <h4>Hours:</h4>
+            <p></p>
+            <p></p>
+          </div>
+
+          <div className="info-box">
+            <h4>Our Location:</h4>
+            <p>123 Bridge Street</p>
+            <p>Nowhere Land, LA 12345</p>
+            <p>United States</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
